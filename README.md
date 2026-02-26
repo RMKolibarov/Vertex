@@ -9,7 +9,7 @@
 | Name | Role |
 |------|------|
 | Rafail Kolibarov | Scrum-Trainer |
-| Nikolai  | Developer |
+| Nikolai Peshev | Developer |
 | Hristiyan Mihailov | Developer |
 | Nikola Dimitrov | Developer |
 
