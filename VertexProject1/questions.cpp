@@ -1,4 +1,5 @@
 ﻿#include "questions.h"
+#include "test.h"
 #include <fstream>
 #include <iostream>
 
@@ -10,7 +11,7 @@ vector<Question> getAllQuestions() {
     vector<Question> bank;
 
     // CATEGORY 1: EXPRESSIONS (1 point each)
-    
+
 
     bank.push_back({
         "Simplify: 3x + 5x",
@@ -99,7 +100,7 @@ vector<Question> getAllQuestions() {
         });
 
     // CATEGORY 3: INEQUALITIES (2 points each)
-    
+
 
     bank.push_back({
         "Solve: x + 3 > 7",
@@ -138,7 +139,7 @@ vector<Question> getAllQuestions() {
         });
 
     // CATEGORY 4: FUNCTIONS (3 points each)
-    
+
 
     bank.push_back({
         "If f(x) = 2x + 1, find f(3).",
@@ -171,7 +172,7 @@ vector<Question> getAllQuestions() {
         });
 
     // CATEGORY 5: WORD PROBLEMS (3 points each)
-    
+
 
     bank.push_back({
         "A number doubled and increased by 3 equals 17. Find it.",

@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "questions.h"
+#include "test.h"
 
 using namespace std;
 
 // СТРУКТУРИ
-
 
 struct User {
     string username;
@@ -14,7 +15,7 @@ struct User {
     string subject;
 };
 
-//ГЛОБАЛНИ ДАННИ
+// ГЛОБАЛНИ ДАННИ (ПОТРЕБИТЕЛИ)
 
 vector<User> users;
 

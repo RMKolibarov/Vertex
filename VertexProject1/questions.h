@@ -1,6 +1,7 @@
 ﻿#ifndef QUESTIONS_H
 #define QUESTIONS_H
 
+#include "test.h"
 #include <string>
 #include <vector>
 
@@ -21,11 +22,11 @@ struct Question {
 
 
 struct TestResult {
-    string username;
-    int totalPoints;
-    int maxPoints;
-    double percentage;
-    int grade;
+    string username = "";
+    int totalPoints = 0;
+    int maxPoints = 0;
+    double percentage = 0.0;
+    int grade = 2;
     vector<int> categoryCorrect;
     vector<int> categoryTotal;
 };
