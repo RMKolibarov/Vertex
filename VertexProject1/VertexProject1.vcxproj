@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0b77c9ac-0b21-40ff-a023-88e8e39680c8}</ProjectGuid>
+    <ProjectGuid>{0B77C9AC-0B21-40FF-A023-88E8E39680C8}</ProjectGuid>
     <RootNamespace>VertexProject1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
