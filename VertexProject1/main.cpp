@@ -3,6 +3,7 @@
 #include <vector>
 #include "questions.h"
 #include "test.h"
+#include "material.h"
 
 using namespace std;
 
