@@ -101,4 +101,4 @@ All project documentation (technical specs, user guides, meeting notes) is maint
 
 ---
 
-*Team Vertex — © 2025*
+*Team Vertex — © 2026*
