@@ -2,7 +2,4 @@
   questions.cpp
   test.cpp
   Generating Code...
-C:\Users\user\source\repos\Vertex\VertexProject1\test.cpp(25,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\user\source\repos\Vertex\VertexProject1\test.cpp(38,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\user\source\repos\Vertex\VertexProject1\test.cpp(46,22): error C2065: 'QUESTIONS_PER_CATEGORY': undeclared identifier
-C:\Users\user\source\repos\Vertex\VertexProject1\test.cpp(53,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  VertexProject1.vcxproj -> C:\Users\User\source\repos\Vertex\x64\Debug\VertexProject1.exe

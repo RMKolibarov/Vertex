@@ -1,8 +1,10 @@
-﻿#ifndef QUESTIONS_H
+#ifndef QUESTIONS_H
 #define QUESTIONS_H
 
 #include <string>
 #include <vector>
+
+// СТРУКТУРА ЗА ВЪПРОС
 
 struct Question {
     std::string text;
@@ -11,6 +13,8 @@ struct Question {
     std::string category;
     int points;
 };
+
+// СТРУКТУРА ЗА РЕЗУЛТАТ
 
 struct TestResult {
     std::string username = "";
@@ -22,9 +26,11 @@ struct TestResult {
     std::vector<int> categoryTotal;
 };
 
-std::vector<Question> getAllQuestions();
+// ДЕКЛАРАЦИИ НА ФУНКЦИИ
+
+std::vector<Question>    getAllQuestions();
 std::vector<std::string> getCategoryNames();
-void saveResult(TestResult result);
-std::vector<TestResult> loadAllResults();
+void                     saveResult(TestResult result);
+std::vector<TestResult>  loadAllResults();
 
 #endif

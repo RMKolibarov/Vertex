@@ -1,42 +1,30 @@
 ﻿#ifndef QUESTIONS_H
 #define QUESTIONS_H
 
-#include "test.h"
 #include <string>
 #include <vector>
 
-using namespace std;
-
-// СТРУКТУРА ЗА ВЪПРОС
-
-
 struct Question {
-    string text;
-    vector<string> options;
+    std::string text;
+    std::vector<std::string> options;
     int correctIndex;
-    string category;
+    std::string category;
     int points;
 };
 
-// СТРУКТУРА ЗА РЕЗУЛТАТ
-
-
 struct TestResult {
-    string username = "";
+    std::string username = "";
     int totalPoints = 0;
     int maxPoints = 0;
     double percentage = 0.0;
     int grade = 2;
-    vector<int> categoryCorrect;
-    vector<int> categoryTotal;
+    std::vector<int> categoryCorrect;
+    std::vector<int> categoryTotal;
 };
 
-// ДЕКЛАРАЦИИ НА ФУНКЦИИ
-
-
-vector<Question> getAllQuestions();
-vector<string> getCategoryNames();
+std::vector<Question> getAllQuestions();
+std::vector<std::string> getCategoryNames();
 void saveResult(TestResult result);
-vector<TestResult> loadAllResults();
+std::vector<TestResult> loadAllResults();
 
 #endif
