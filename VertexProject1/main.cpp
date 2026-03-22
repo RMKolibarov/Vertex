@@ -3,6 +3,7 @@
 #include <vector>
 #include "questions.h"
 #include "test.h"
+#include "statistics.h"
 #include "material.h"
 
 using namespace std;
@@ -10,13 +11,13 @@ using namespace std;
 // СТРУКТУРИ
 
 struct User {
-    string username;
-    string passwordHash;
-    string role;
-    string subject;
+    string username = "";
+    string passwordHash = "";
+    string role = "";
+    string subject = "";
 };
 
-// ГЛОБАЛНИ ДАННИ (ПОТРЕБИТЕЛИ)
+// ГЛОБАЛНИ ДАННИ
 
 vector<User> users;
 
@@ -24,7 +25,7 @@ vector<User> users;
 
 string hashPassword(string password) {
     string hashed = "";
-    for (int i = 0; i < password.length(); i++) {
+    for (int i = 0; i < (int)password.length(); i++) {
         hashed += char(password[i] + 3);
     }
     return hashed;
@@ -37,7 +38,7 @@ int safeInput() {
     while (!(cin >> value)) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "  Invalid input. Enter a number: ";
+        cout << "  Невалиден вход. Въведи число: ";
     }
     return value;
 }
@@ -58,10 +59,10 @@ void initializeUsers() {
     users.push_back({ "VIvanova",   hashPassword("vivanova123"),   "Teacher", "History" });
 
     // Ученици
-    users.push_back({ "Rafail",    hashPassword("pass1"), "Student", "" });
-    users.push_back({ "Hristian",  hashPassword("pass2"), "Student", "" });
-    users.push_back({ "Nikola",    hashPassword("pass3"), "Student", "" });
-    users.push_back({ "Nikolai",   hashPassword("pass4"), "Student", "" });
+    users.push_back({ "Rafail",   hashPassword("pass1"), "Student", "" });
+    users.push_back({ "Hristian", hashPassword("pass2"), "Student", "" });
+    users.push_back({ "Nikola",   hashPassword("pass3"), "Student", "" });
+    users.push_back({ "Nikolai",  hashPassword("pass4"), "Student", "" });
 }
 
 // ЛОГИН
@@ -71,16 +72,16 @@ int login() {
 
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "              LOGIN                     " << '\n';
+    cout << "              ВХОД                      " << '\n';
     cout << "========================================" << '\n';
-    cout << "  Username: ";
+    cout << "  Потребителско име: ";
     cin >> inputUsername;
-    cout << "  Password: ";
+    cout << "  Парола: ";
     cin >> inputPassword;
 
     string inputHash = hashPassword(inputPassword);
 
-    for (int i = 0; i < users.size(); i++) {
+    for (int i = 0; i < (int)users.size(); i++) {
         if (users[i].username == inputUsername &&
             users[i].passwordHash == inputHash) {
             return i;
@@ -98,39 +99,33 @@ void studentMenu(string username) {
     while (true) {
         cout << '\n';
         cout << "========================================" << '\n';
-        cout << "     STUDENT DASHBOARD                  " << '\n';
-        cout << "     Welcome, " << username << "!" << '\n';
+        cout << "     УЧЕНИЧЕСКИ ПАНЕЛ                   " << '\n';
+        cout << "     Добре дошъл, " << username << "!" << '\n';
         cout << "========================================" << '\n';
-        cout << "  1. Start Test" << '\n';
-        cout << "  2. View My Results" << '\n';
-        cout << "  3. View Study Material" << '\n';
-        cout << "  4. Logout" << '\n';
+        cout << "  1. Започни тест" << '\n';
+        cout << "  2. Виж моите резултати" << '\n';
+        cout << "  3. Учебно съдържание" << '\n';
+        cout << "  4. Изход" << '\n';
         cout << "========================================" << '\n';
-        cout << "  Choose an option: ";
+        cout << "  Избери опция: ";
         choice = safeInput();
 
         if (choice == 1) {
-            cout << '\n';
-            cout << "  [TEST] Starting test..." << '\n';
-            cout << "  (Person 2 & 3 will add this)" << '\n';
+            runTest(username);
         }
         else if (choice == 2) {
-            cout << '\n';
-            cout << "  [RESULTS] Your results:" << '\n';
-            cout << "  (Person 4 will add this)" << '\n';
+            showStudentResults(username);
         }
         else if (choice == 3) {
-            cout << '\n';
-            cout << "  [STUDY] Study material:" << '\n';
-            cout << "  (Will be added later)" << '\n';
+            showStudyMenu();
         }
         else if (choice == 4) {
             cout << '\n';
-            cout << "  Logging out..." << '\n';
+            cout << "  Излизане..." << '\n';
             break;
         }
         else {
-            cout << "  Invalid choice. Try again." << '\n';
+            cout << "  Невалиден избор. Опитай пак." << '\n';
         }
     }
 }
@@ -143,51 +138,43 @@ void teacherMenu(string username, string subject) {
     while (true) {
         cout << '\n';
         cout << "========================================" << '\n';
-        cout << "     TEACHER DASHBOARD                  " << '\n';
-        cout << "     Welcome, " << username << "!" << '\n';
-        cout << "     Subject: " << subject << '\n';
+        cout << "     УЧИТЕЛСКИ ПАНЕЛ                    " << '\n';
+        cout << "     Добре дошъл, " << username << "!" << '\n';
+        cout << "     Предмет: " << subject << '\n';
         cout << "========================================" << '\n';
-        cout << "  1. View All Results" << '\n';
-        cout << "  2. View Statistics" << '\n';
-        cout << "  3. View Best & Worst Students" << '\n';
-        cout << "  4. View Category Statistics" << '\n';
-        cout << "  5. Logout" << '\n';
+        cout << "  1. Всички резултати" << '\n';
+        cout << "  2. Средна статистика" << '\n';
+        cout << "  3. Най-добър и най-слаб ученик" << '\n';
+        cout << "  4. Статистика по категории" << '\n';
+        cout << "  5. Изход" << '\n';
         cout << "========================================" << '\n';
-        cout << "  Choose an option: ";
+        cout << "  Избери опция: ";
         choice = safeInput();
 
         if (choice == 1) {
-            cout << '\n';
-            cout << "  [ALL RESULTS] for " << subject << '\n';
-            cout << "  (Person 4 will add this)" << '\n';
+            showAllResults();
         }
         else if (choice == 2) {
-            cout << '\n';
-            cout << "  [STATISTICS] Average grade for " << subject << '\n';
-            cout << "  (Person 4 will add this)" << '\n';
+            showAverageResult();
         }
         else if (choice == 3) {
-            cout << '\n';
-            cout << "  [BEST & WORST] in " << subject << '\n';
-            cout << "  (Person 4 will add this)" << '\n';
+            showBestAndWorst();
         }
         else if (choice == 4) {
-            cout << '\n';
-            cout << "  [CATEGORY STATS] for " << subject << '\n';
-            cout << "  (Person 4 will add this)" << '\n';
+            showCategoryStats();
         }
         else if (choice == 5) {
             cout << '\n';
-            cout << "  Logging out..." << '\n';
+            cout << "  Излизане..." << '\n';
             break;
         }
         else {
-            cout << "  Invalid choice. Try again." << '\n';
+            cout << "  Невалиден избор. Опитай пак." << '\n';
         }
     }
 }
 
-// MAIN PAGE
+// MAIN
 
 int main() {
     initializeUsers();
@@ -196,15 +183,15 @@ int main() {
 
     cout << "========================================" << '\n';
     cout << "   VERTEX E-SCHOOL                      " << '\n';
-    cout << "   Subject: Mathematics                 " << '\n';
-    cout << "   Topic: Algebra Fundamentals           " << '\n';
+    cout << "   Предмет: Математика                  " << '\n';
+    cout << "   Тема: Квадратни уравнения             " << '\n';
     cout << "========================================" << '\n';
 
     while (true) {
         cout << '\n';
-        cout << "  1. Login" << '\n';
-        cout << "  2. Exit" << '\n';
-        cout << "  Choose an option: ";
+        cout << "  1. Вход" << '\n';
+        cout << "  2. Изход" << '\n';
+        cout << "  Избери опция: ";
         choice = safeInput();
 
         if (choice == 1) {
@@ -212,7 +199,7 @@ int main() {
 
             if (userIndex != -1) {
                 cout << '\n';
-                cout << "  Login successful!" << '\n';
+                cout << "  Успешен вход!" << '\n';
 
                 if (users[userIndex].role == "Teacher") {
                     teacherMenu(users[userIndex].username,
@@ -224,16 +211,16 @@ int main() {
             }
             else {
                 cout << '\n';
-                cout << "  Invalid username or password!" << '\n';
+                cout << "  Грешно потребителско име или парола!" << '\n';
             }
         }
         else if (choice == 2) {
             cout << '\n';
-            cout << "  Goodbye from Vertex E-School!" << '\n';
+            cout << "  Довиждане от Vertex E-School!" << '\n';
             break;
         }
         else {
-            cout << "  Invalid choice." << '\n';
+            cout << "  Невалиден избор." << '\n';
         }
     }
 

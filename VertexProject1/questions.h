@@ -4,13 +4,17 @@
 #include <string>
 #include <vector>
 
+// СТРУКТУРА ЗА ВЪПРОС
+
 struct Question {
     std::string text;
     std::vector<std::string> options;
-    int correctIndex;
+    int correctIndex = 0;
     std::string category;
-    int points;
+    int points = 0;
 };
+
+// СТРУКТУРА ЗА РЕЗУЛТАТ
 
 struct TestResult {
     std::string username = "";
@@ -21,6 +25,8 @@ struct TestResult {
     std::vector<int> categoryCorrect;
     std::vector<int> categoryTotal;
 };
+
+// ДЕКЛАРАЦИИ НА ФУНКЦИИ
 
 std::vector<Question> getAllQuestions();
 std::vector<std::string> getCategoryNames();
