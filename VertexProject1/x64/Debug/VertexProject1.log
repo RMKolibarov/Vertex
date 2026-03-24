@@ -1,4 +1,8 @@
 ﻿  main.cpp
-  VertexProject1.vcxproj -> C:\Users\rafat\source\repos\Vertex\x64\Debug\VertexProject1.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+  material.cpp
+  questions.cpp
+  statistics.cpp
+  test.cpp
+  Generating Code...
+  LINK : C:\Users\user\source\repos\Vertex\x64\Debug\VertexProject1.exe not found or not built by the last incremental link; performing full link
+  VertexProject1.vcxproj -> C:\Users\user\source\repos\Vertex\x64\Debug\VertexProject1.exe
