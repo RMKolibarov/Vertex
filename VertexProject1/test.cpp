@@ -5,8 +5,6 @@
 
 using namespace std;
 
-// ОЦЕНЯВАНЕ ПО ШЕСТОБАЛНАТА СИСТЕМА
-
 int calculateGrade(double percentage) {
     if (percentage >= 90.0) return 6;
     if (percentage >= 75.0) return 5;
@@ -14,8 +12,6 @@ int calculateGrade(double percentage) {
     if (percentage >= 45.0) return 3;
     return 2;
 }
-
-// ГЕНЕРИРАНЕ НА ТЕСТ
 
 vector<Question> generateTest(vector<Question> bank) {
     vector<Question> test;
@@ -25,7 +21,7 @@ vector<Question> generateTest(vector<Question> bank) {
 
     for (int c = 0; c < (int)categories.size(); c++) {
 
-        // Събираме всички въпроси от тази категория
+        // Collect all questions from this category
         vector<Question> pool;
         for (int i = 0; i < (int)bank.size(); i++) {
             if (bank[i].category == categories[c]) {
@@ -33,7 +29,7 @@ vector<Question> generateTest(vector<Question> bank) {
             }
         }
 
-        // Разбъркваме въпросите (Fisher-Yates shuffle)
+        // Shuffle the questions
         for (int i = (int)pool.size() - 1; i > 0; i--) {
             int j = rand() % (i + 1);
             Question temp = pool[i];
@@ -41,14 +37,14 @@ vector<Question> generateTest(vector<Question> bank) {
             pool[j] = temp;
         }
 
-        // Вземаме нужния брой въпроси
+        // Take the number of questions
         int needed = QUESTIONS_PER_CATEGORY[c];
         for (int i = 0; i < needed && i < (int)pool.size(); i++) {
             test.push_back(pool[i]);
         }
     }
 
-    // Финално разбъркване на целия тест
+    // Shuffle the test
     for (int i = (int)test.size() - 1; i > 0; i--) {
         int j = rand() % (i + 1);
         Question temp = test[i];
@@ -59,26 +55,22 @@ vector<Question> generateTest(vector<Question> bank) {
     return test;
 }
 
-// БЕЗОПАСНО ЧЕТЕНЕ НА ОТГОВОР (1-4)
-
 int safeAnswerInput() {
     int value;
     while (true) {
         if (!(cin >> value)) {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "  Невалиден вход. Въведи 1-4: ";
+            cout << "  Invalid input. Enter 1-4: ";
         }
         else if (value < 1 || value > 4) {
-            cout << "  Моля въведи 1, 2, 3 или 4: ";
+            cout << "  Please enter 1, 2, 3 or 4: ";
         }
         else {
             return value;
         }
     }
 }
-
-// ПРОВЕЖДАНЕ НА ТЕСТА
 
 TestResult runTest(string username) {
     vector<Question> bank = getAllQuestions();
@@ -91,24 +83,22 @@ TestResult runTest(string username) {
     int totalPoints = 0;
     int maxPoints = 0;
 
-    // Заглавие на теста
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "     ТЕСТ: КВАДРАТНИ УРАВНЕНИЯ          " << '\n';
-    cout << "     Ученик: " << username << '\n';
-    cout << "     Въпроси: " << test.size() << '\n';
+    cout << "     TEST: QUADRATIC EQUATIONS          " << '\n';
+    cout << "     Student: " << username << '\n';
+    cout << "     Questions: " << test.size() << '\n';
     cout << "========================================" << '\n';
-    cout << "  Отговори на всеки въпрос като" << '\n';
-    cout << "  въведеш число от 1 до 4." << '\n';
+    cout << "  Answer each question by entering" << '\n';
+    cout << "  a number from 1 to 4." << '\n';
     cout << "========================================" << '\n';
 
-    // Задаваме всеки въпрос
-    for (int q = 0; q < (int)test.size(); q++) {
+    for (int q = 0; q < (int)test.size(); q++) { //q = Question
 
         cout << '\n';
-        cout << "  Въпрос " << (q + 1) << "/" << test.size();
+        cout << "  Question " << (q + 1) << "/" << test.size();
         cout << "  [" << test[q].category << "]";
-        cout << "  (" << test[q].points << " т.)" << '\n';
+        cout << "  (" << test[q].points << " pts)" << '\n';
         cout << "  " << test[q].text << '\n';
         cout << '\n';
 
@@ -117,10 +107,9 @@ TestResult runTest(string username) {
         }
 
         cout << '\n';
-        cout << "  Твоят отговор: ";
+        cout << "  Your answer: ";
         int answer = safeAnswerInput();
 
-        // Намираме индекса на категорията
         int catIndex = -1;
         for (int i = 0; i < (int)categories.size(); i++) {
             if (categories[i] == test[q].category) {
@@ -134,39 +123,36 @@ TestResult runTest(string username) {
             catTotal[catIndex]++;
         }
 
-        // Проверяваме отговора
         if ((answer - 1) == test[q].correctIndex) {
-            cout << "  Верно! +" << test[q].points << " точки" << '\n';
+            cout << "  Correct! +" << test[q].points << " points" << '\n';
             totalPoints += test[q].points;
             if (catIndex != -1) {
                 catCorrect[catIndex]++;
             }
         }
         else {
-            cout << "  Грешно! Верният отговор е: "
+            cout << "  Wrong! The correct answer is: "
                 << test[q].options[test[q].correctIndex] << '\n';
         }
     }
 
-    // Изчисляваме резултата
     double percentage = 0.0;
     if (maxPoints > 0) {
         percentage = (double)totalPoints / maxPoints * 100.0;
     }
     int grade = calculateGrade(percentage);
 
-    // Показваме резултата
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "           РЕЗУЛТАТИ                    " << '\n';
+    cout << "           RESULTS                      " << '\n';
     cout << "========================================" << '\n';
-    cout << "  Ученик:   " << username << '\n';
-    cout << "  Точки:    " << totalPoints << " / " << maxPoints << '\n';
-    cout << "  Процент:  " << (int)percentage << "%" << '\n';
-    cout << "  Оценка:   " << grade << " / 6" << '\n';
+    cout << "  Student:  " << username << '\n';
+    cout << "  Points:   " << totalPoints << " / " << maxPoints << '\n';
+    cout << "  Percent:  " << (int)percentage << "%" << '\n';
+    cout << "  Grade:    " << grade << " / 6" << '\n';
     cout << "========================================" << '\n';
     cout << '\n';
-    cout << "  Резултати по категории:" << '\n';
+    cout << "  Results by category:" << '\n';
     cout << "  ----------------------------------------" << '\n';
 
     for (int i = 0; i < (int)categories.size(); i++) {
@@ -181,7 +167,6 @@ TestResult runTest(string username) {
 
     cout << "  ----------------------------------------" << '\n';
 
-    // Създаваме и записваме резултата
     TestResult result;
     result.username = username;
     result.totalPoints = totalPoints;
@@ -193,7 +178,7 @@ TestResult runTest(string username) {
 
     saveResult(result);
     cout << '\n';
-    cout << "  Резултатът е записан успешно!" << '\n';
+    cout << "  Result saved successfully!" << '\n';
 
     return result;
 }

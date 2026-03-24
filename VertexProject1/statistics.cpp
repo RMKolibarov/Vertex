@@ -5,27 +5,25 @@
 
 using namespace std;
 
-// ПОКАЗВАНЕ НА ВСИЧКИ РЕЗУЛТАТИ
-
 void showAllResults() {
     vector<TestResult> results = loadAllResults();
 
     if (results.size() == 0) {
         cout << '\n';
-        cout << "  Няма записани резултати." << '\n';
+        cout << "  No results found." << '\n';
         return;
     }
 
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "         ВСИЧКИ РЕЗУЛТАТИ               " << '\n';
+    cout << "         ALL RESULTS                    " << '\n';
     cout << "========================================" << '\n';
     cout << '\n';
     cout << "  " << left
-        << setw(14) << "Ученик"
-        << setw(12) << "Точки"
-        << setw(10) << "Процент"
-        << setw(8) << "Оценка" << '\n';
+        << setw(14) << "Student"
+        << setw(12) << "Points"
+        << setw(10) << "Percent"
+        << setw(8) << "Grade" << '\n';
     cout << "  ----------------------------------------" << '\n';
 
     for (int i = 0; i < (int)results.size(); i++) {
@@ -41,17 +39,15 @@ void showAllResults() {
     }
 
     cout << "  ----------------------------------------" << '\n';
-    cout << "  Общо тестове: " << results.size() << '\n';
+    cout << "  Total tests: " << results.size() << '\n';
 }
-
-// СРЕДЕН РЕЗУЛТАТ
 
 void showAverageResult() {
     vector<TestResult> results = loadAllResults();
 
     if (results.size() == 0) {
         cout << '\n';
-        cout << "  Няма записани резултати." << '\n';
+        cout << "  No results found." << '\n';
         return;
     }
 
@@ -71,26 +67,24 @@ void showAverageResult() {
 
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "       СРЕДНА СТАТИСТИКА                " << '\n';
+    cout << "       AVERAGE STATISTICS               " << '\n';
     cout << "========================================" << '\n';
-    cout << "  Общо тестове:      " << results.size() << '\n';
-    cout << "  Средни точки:      "
+    cout << "  Total tests:       " << results.size() << '\n';
+    cout << "  Average points:    "
         << fixed << setprecision(1) << avgPoints << '\n';
-    cout << "  Среден процент:    "
+    cout << "  Average percent:   "
         << fixed << setprecision(1) << avgPercentage << "%" << '\n';
-    cout << "  Средна оценка:     "
+    cout << "  Average grade:     "
         << fixed << setprecision(2) << avgGrade << " / 6" << '\n';
     cout << "========================================" << '\n';
 }
-
-// НАЙ-ДОБЪР И НАЙ-СЛАБ УЧЕНИК
 
 void showBestAndWorst() {
     vector<TestResult> results = loadAllResults();
 
     if (results.size() == 0) {
         cout << '\n';
-        cout << "  Няма записани резултати." << '\n';
+        cout << "  No results found." << '\n';
         return;
     }
 
@@ -108,26 +102,24 @@ void showBestAndWorst() {
 
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "     НАЙ-ДОБЪР И НАЙ-СЛАБ РЕЗУЛТАТ     " << '\n';
+    cout << "     BEST & WORST RESULT                " << '\n';
     cout << "========================================" << '\n';
     cout << '\n';
-    cout << "  НАЙ-ДОБЪР РЕЗУЛТАТ:" << '\n';
-    cout << "    Ученик:   " << results[bestIndex].username << '\n';
-    cout << "    Точки:    " << results[bestIndex].totalPoints
+    cout << "  BEST RESULT:" << '\n';
+    cout << "    Student:  " << results[bestIndex].username << '\n';
+    cout << "    Points:   " << results[bestIndex].totalPoints
         << "/" << results[bestIndex].maxPoints << '\n';
-    cout << "    Процент:  " << (int)results[bestIndex].percentage << "%" << '\n';
-    cout << "    Оценка:   " << results[bestIndex].grade << " / 6" << '\n';
+    cout << "    Percent:  " << (int)results[bestIndex].percentage << "%" << '\n';
+    cout << "    Grade:    " << results[bestIndex].grade << " / 6" << '\n';
     cout << '\n';
-    cout << "  НАЙ-СЛАБ РЕЗУЛТАТ:" << '\n';
-    cout << "    Ученик:   " << results[worstIndex].username << '\n';
-    cout << "    Точки:    " << results[worstIndex].totalPoints
+    cout << "  WORST RESULT:" << '\n';
+    cout << "    Student:  " << results[worstIndex].username << '\n';
+    cout << "    Points:   " << results[worstIndex].totalPoints
         << "/" << results[worstIndex].maxPoints << '\n';
-    cout << "    Процент:  " << (int)results[worstIndex].percentage << "%" << '\n';
-    cout << "    Оценка:   " << results[worstIndex].grade << " / 6" << '\n';
+    cout << "    Percent:  " << (int)results[worstIndex].percentage << "%" << '\n';
+    cout << "    Grade:    " << results[worstIndex].grade << " / 6" << '\n';
     cout << "========================================" << '\n';
 }
-
-// СТАТИСТИКА ПО КАТЕГОРИИ
 
 void showCategoryStats() {
     vector<TestResult> results = loadAllResults();
@@ -135,7 +127,7 @@ void showCategoryStats() {
 
     if (results.size() == 0) {
         cout << '\n';
-        cout << "  Няма записани резултати." << '\n';
+        cout << "  No results found." << '\n';
         return;
     }
 
@@ -157,13 +149,13 @@ void showCategoryStats() {
 
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "     СТАТИСТИКА ПО КАТЕГОРИИ            " << '\n';
+    cout << "     CATEGORY STATISTICS                " << '\n';
     cout << "========================================" << '\n';
     cout << '\n';
     cout << "  " << left
-        << setw(24) << "Категория"
-        << setw(12) << "Верни"
-        << setw(10) << "Успех" << '\n';
+        << setw(24) << "Category"
+        << setw(12) << "Correct"
+        << setw(10) << "Success" << '\n';
     cout << "  ----------------------------------------" << '\n';
 
     for (int c = 0; c < (int)categories.size(); c++) {
@@ -187,14 +179,12 @@ void showCategoryStats() {
 
     cout << "  ----------------------------------------" << '\n';
     cout << '\n';
-    cout << "  Най-лесна категория: " << categories[bestCat]
+    cout << "  Easiest category: " << categories[bestCat]
         << " (" << (int)catPercentage[bestCat] << "%)" << '\n';
-    cout << "  Най-трудна категория: " << categories[worstCat]
+    cout << "  Hardest category: " << categories[worstCat]
         << " (" << (int)catPercentage[worstCat] << "%)" << '\n';
     cout << "========================================" << '\n';
 }
-
-// РЕЗУЛТАТИ НА КОНКРЕТЕН УЧЕНИК
 
 void showStudentResults(string username) {
     vector<TestResult> results = loadAllResults();
@@ -204,8 +194,8 @@ void showStudentResults(string username) {
 
     cout << '\n';
     cout << "========================================" << '\n';
-    cout << "     МОИТЕ РЕЗУЛТАТИ                    " << '\n';
-    cout << "     Ученик: " << username << '\n';
+    cout << "     MY RESULTS                         " << '\n';
+    cout << "     Student: " << username << '\n';
     cout << "========================================" << '\n';
 
     for (int i = 0; i < (int)results.size(); i++) {
@@ -214,11 +204,11 @@ void showStudentResults(string username) {
             found = true;
 
             cout << '\n';
-            cout << "  --- Тест #" << testNum << " ---" << '\n';
-            cout << "  Точки:   " << results[i].totalPoints
+            cout << "  --- Test #" << testNum << " ---" << '\n';
+            cout << "  Points:  " << results[i].totalPoints
                 << "/" << results[i].maxPoints << '\n';
-            cout << "  Процент: " << (int)results[i].percentage << "%" << '\n';
-            cout << "  Оценка:  " << results[i].grade << " / 6" << '\n';
+            cout << "  Percent: " << (int)results[i].percentage << "%" << '\n';
+            cout << "  Grade:   " << results[i].grade << " / 6" << '\n';
             cout << '\n';
 
             for (int c = 0; c < (int)categories.size(); c++) {
@@ -239,7 +229,7 @@ void showStudentResults(string username) {
 
     if (!found) {
         cout << '\n';
-        cout << "  Няма записани резултати за този ученик." << '\n';
+        cout << "  No results found for this student." << '\n';
     }
 
     cout << "========================================" << '\n';

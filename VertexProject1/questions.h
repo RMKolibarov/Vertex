@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-// СТРУКТУРА ЗА ВЪПРОС
-
 struct Question {
     std::string text;
     std::vector<std::string> options;
@@ -13,8 +11,6 @@ struct Question {
     std::string category;
     int points = 0;
 };
-
-// СТРУКТУРА ЗА РЕЗУЛТАТ
 
 struct TestResult {
     std::string username = "";
@@ -26,11 +22,9 @@ struct TestResult {
     std::vector<int> categoryTotal;
 };
 
-// ДЕКЛАРАЦИИ НА ФУНКЦИИ
-
 std::vector<Question> getAllQuestions();
 std::vector<std::string> getCategoryNames();
 void saveResult(TestResult result);
-std::vector<TestResult> loadAllResults();
+std::vector<TestResult>  loadAllResults();
 
 #endif
